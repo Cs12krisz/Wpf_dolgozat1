@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <DataGrid x:Name="dgAdatok" Margin="0,0,438,0"/>
+        <Button Content="Lekérdez" HorizontalAlignment="Left" Margin="560,253,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

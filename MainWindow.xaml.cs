@@ -19,6 +19,7 @@ namespace Wpf_dolgozat1
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }
