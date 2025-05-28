@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MySql.Data.MySqlClient;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,9 @@ namespace Wpf_dolgozat1
     /// </summary>
     public partial class MainWindow : Window
     {
+        MySqlConnection kapcs = new MySqlConnection("server = srv1.tarhely.pro;database = v2labgwj_12a; uid =v2labgwj_12a; password = 'HASnEeKvbDEPGgvTZubG';");
+        List<Film> filmek = new List<Film>();
+
         public MainWindow()
         {
             InitializeComponent();
