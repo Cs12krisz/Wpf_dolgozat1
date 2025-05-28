@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace Wpf_dolgozat1
 {
@@ -38,8 +39,9 @@ namespace Wpf_dolgozat1
         }
 
         private void kivalasztott(object sender, SelectionChangedEventArgs e) {
-            var item = dgAdatok.SelectedItem as Film;
-            Film? film = item;
+            var film = dgAdatok.SelectedItem as Film;
+            if (film == null)
+                return;
             lbFilmAzon.Content = film.Filmazon.ToString();
             tb1.Text = film.Cim;
             tb2.Text = film.Ev.ToString();
@@ -52,6 +54,7 @@ namespace Wpf_dolgozat1
             kapcs.Open();
             new MySqlCommand($"UPDATE csigeri_filmek SET cim = '{tb1.Text}', ev = {tb2.Text}, szines = '{tb3.Text}', mufaj = '{tb4.Text}', hossz = {tb5.Text} WHERE filmazon = '{lbFilmAzon.Content}'", kapcs).ExecuteNonQuery();
             filmek.Clear();
+            dgAdatok.ItemsSource = null;
             var lekerdezes = new MySqlCommand("SELECT * FROM csigeri_filmek", kapcs).ExecuteReader();
             while (lekerdezes.Read()) {
                 filmek.Add(new Film(lekerdezes.GetString(0), lekerdezes.GetString(1), lekerdezes.GetInt32(2), lekerdezes.GetString(3), lekerdezes.GetString(4), lekerdezes.GetInt32(5)));
